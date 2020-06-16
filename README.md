@@ -10,7 +10,7 @@ SportScribe Wordpress Plugin v0.1
 
 1. Clone this repository you wp-content/plugins directory
 1. Go to your WP Admin panel -> Plugins and 'Activate' the SportScribe plugin
-1. On the admin menu go to "SportScribe Plugin" and enter the correct API ENDPOINT and API KEY and click Save. 
+1. On the admin menu go to "SportScribe Plugin" and enter the correct API KEY and click Save. 
   1. This will do a test API call and confirm whether you entererd it correctly.
 
 

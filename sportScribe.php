@@ -42,7 +42,7 @@ function sportscribe_install() {
 
   // Set grab_days to default 3
   update_option('sportscribe_grab_days', 3 );
-
+  update_option('sportscribe_endpoint', 'https://api.sportscribe.co/v1_0/');
 }
 
 add_action('admin_menu', 'sportscribe_plugin_setup_menu');

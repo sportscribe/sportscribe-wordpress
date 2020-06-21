@@ -261,7 +261,7 @@ function ss_post_previews() {
 
 
 // Put the previews on the homepage
-function custom_conference_in_home_loop( $query ) {
+function custom_posts_in_home_loop( $query ) {
   if ( is_home() && $query->is_main_query() )
   $query->set( 'post_type', array( 'post', 'preview') );
   return $query;
@@ -282,7 +282,7 @@ function order_posts_by_fixture_date( $query ) {
 // If the option is set, display previews on homepage
 if(get_option( 'sportscribe_front_page' )) {
 
-  add_filter( 'pre_get_posts', 'custom_conference_in_home_loop' );
+  add_filter( 'pre_get_posts', 'custom_posts_in_home_loop' );
   add_action( 'pre_get_posts', 'order_posts_by_fixture_date' );
 
 }

@@ -27,6 +27,14 @@
 				<td><input type="checkbox" name="front_page" <?php if(get_option( 'sportscribe_front_page' )) echo 'checked'; ?>></td>
 				<td>Display on Front Page ?</td>
 			</tr>
+			<tr>
+				<td><input type="checkbox" name="use_header_img" <?php if(get_option( 'sportscribe_use_header_img' )) echo 'checked'; ?>></td>
+				<td>Use header images in post ?</td>
+			</tr>
+			<tr>
+				<td><?php wp_dropdown_users( array( 'name' => 'ss_author' ) ); ?></td>
+				<td>New posts will authord by this user</td>
+			</tr>
 		</table>
         <?php submit_button('Update Settings') ?>
 	</form>

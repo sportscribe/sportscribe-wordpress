@@ -15,8 +15,7 @@ function sportscribe_doSubmit() {
             echo '<b>Invalid API KEY or ENDPOINT</b><br><br>';
           }
 
-        } else if(isset($_POST['test_post'])) {
-
+        } else if( 1 == 2) {
 
 
         } else if ( isset($_POST['test_grab']) ) {
@@ -31,9 +30,17 @@ function sportscribe_doSubmit() {
           else
             update_option('sportscribe_front_page', 0 );
 
+          if(isset($_POST['use_header_img']))
+            update_option('sportscribe_use_header_img', 1 );
+          else
+            update_option('sportscribe_use_header_img', 0 );
+
           if(isset($_POST['sportscribe_grab_days']) && is_numeric($_POST['sportscribe_grab_days']))
             update_option('sportscribe_grab_days', min(14,$_POST['sportscribe_grab_days']) );
 
+	  if(isset($_POST['ss_author'])) {
+            update_option('sportscribe_author_id', $_POST['ss_author']);
+          }
 
         }
 

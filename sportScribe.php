@@ -3,7 +3,7 @@
  * Plugin Name: SportScribe API <> Wordpress 
  * Plugin URI: https://github.com/sportscribe/sportscribe-wordpress
  * Description: Automatically post SportScribe articles to your Wordpress site.
- * Version: 0.1.1
+ * Version: 0.1.2
  * Author: SportScribe
  * Author URI: https://sportscribe.co/
  */
@@ -217,12 +217,27 @@ function ss_post_previews() {
 
     $fixture_id = $r->fixture_id;
 
+    $content = '';
+
+    if(sizeof($j->blurb_split) > 1) {
+
+      foreach($j->blurb_split as $c) {
+        $content .= "<p>$c</p>";
+      }
+
+    } else {
+
+      $content = $j->blurb_full; 
+
+    }
+
     $post_arr = array(
       'post_title'   => $j->hometeam_name . " vs " . $j->visitorteam_name . " Match Preview",
       'post_type'    => 'preview',
-      'post_content' => $j->blurb_full,
+//      'post_content' => '[ss_header_img]' . "\n<br>\n" . $j->blurb_full,
+      'post_content' => '[ss_header_img]' . "\n<br>\n" . $content,
       'post_status'  => 'publish',
-      'post_author'  => get_current_user_id(),
+      'post_author'  => get_option( 'sportscribe_author_id' , get_current_user_id() ),
       'meta_input'   => array(
 	  'ss_meta_league_id'		=> $j->league_id,
 	  'ss_meta_league_name'		=> $j->league,
@@ -262,7 +277,7 @@ function ss_post_previews() {
 
 // Put the previews on the homepage
 function custom_posts_in_home_loop( $query ) {
-  if ( is_home() && $query->is_main_query() )
+  if ( $query->is_home() && $query->is_main_query() )
   $query->set( 'post_type', array( 'post', 'preview') );
   return $query;
 }
@@ -313,5 +328,6 @@ flush_rewrite_rules( false );
 
 
 require_once(dirname(__FILE__).'/custom_code.php');
+require_once(dirname(__FILE__).'/custom_shortcode.php');
 
 ?>

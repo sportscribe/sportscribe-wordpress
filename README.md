@@ -1,5 +1,5 @@
 # sportscribe-wp
-SportScribe Wordpress Plugin v0.1
+SportScribe Wordpress Plugin v0.1.3
 
 ### This is a very preliminary version of the plugin. If you have questions, comments or feature requests, please contact support@sportscribe.co
 
@@ -47,3 +47,9 @@ The following meta data is set for each post
 
 * league = The match's league name
 * country = The match's country
+
+### Change Log
+
+v0.1.3 = Changed custom tax to be public
+v0.1.2 = Minor bug fixes
+v0.1.1 = Added custom_code.php to allow easy customization, and cleaned up dir structure

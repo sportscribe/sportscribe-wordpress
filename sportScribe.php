@@ -3,7 +3,7 @@
  * Plugin Name: SportScribe API <> Wordpress 
  * Plugin URI: https://github.com/sportscribe/sportscribe-wordpress
  * Description: Automatically post SportScribe articles to your Wordpress site.
- * Version: 0.1.2
+ * Version: 0.1.3
  * Author: SportScribe
  * Author URI: https://sportscribe.co/
  */
@@ -65,7 +65,7 @@ function create_post_tax() {
 	$args = array(
 		'hierarchical'  => false,
 		'rewrite'	=> false,
-		'publicly_queryable'	=> false,
+		'publicly_queryable'	=> true,
 		'show_in_menu'	=> false,
 
 		'labels'	=> $labels
@@ -80,7 +80,7 @@ function create_post_tax() {
 
 	$args = array(
 		'hierarchical'  => false,
-		'publicly_queryable'	=> false,
+		'publicly_queryable'	=> true,
 		'rewrite'	=> false,
 		'show_in_menu'	=> false,
 		'labels'	=> $labels

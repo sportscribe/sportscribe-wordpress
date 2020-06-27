@@ -321,7 +321,7 @@ function sportscribe_do_cron_hook() {
 // Setup the hook to pull data automatically
 add_action( 'sportscribe_cron_hook', 'sportscribe_do_cron_hook' );
 if ( ! wp_next_scheduled( 'sportscribe_cron_hook' ) ) {
-    wp_schedule_event( strtotime('00:00:00') , 'daily', 'sportscribe_cron_hook' );
+    wp_schedule_event( strtotime('00:00:00') + random_int(0,3600) , 'daily', 'sportscribe_cron_hook' );
 }
 
 flush_rewrite_rules( false );

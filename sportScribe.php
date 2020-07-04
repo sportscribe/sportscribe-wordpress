@@ -3,7 +3,7 @@
  * Plugin Name: SportScribe API <> Wordpress 
  * Plugin URI: https://github.com/sportscribe/sportscribe-wordpress
  * Description: Automatically post SportScribe articles to your Wordpress site.
- * Version: 0.1.3
+ * Version: 0.1.4
  * Author: SportScribe
  * Author URI: https://sportscribe.co/
  */
@@ -21,7 +21,7 @@ function sportscribe_uninstall() {
 
   // Remove the cron hook
   $timestamp = wp_next_scheduled( 'sportscribe_cron_hook' );
-  wp_unschedule_event( $timestamp, 'sportscribe_cron_hook', $array() );
+  wp_unschedule_event( $timestamp, 'sportscribe_cron_hook');
 
 }
 

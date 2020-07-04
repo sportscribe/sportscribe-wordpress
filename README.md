@@ -50,6 +50,7 @@ The following meta data is set for each post
 
 ### Change Log
 
+v0.1.4 = Minor bug fixes
 v0.1.3 = Changed custom tax to be public
 v0.1.2 = Minor bug fixes
 v0.1.1 = Added custom_code.php to allow easy customization, and cleaned up dir structure

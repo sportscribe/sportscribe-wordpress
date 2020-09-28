@@ -3,7 +3,7 @@
  * Plugin Name: SportScribe API <> Wordpress 
  * Plugin URI: https://github.com/sportscribe/sportscribe-wordpress
  * Description: Automatically post SportScribe articles to your Wordpress site.
- * Version: 0.1.4
+ * Version: 0.1.5
  * Author: SportScribe
  * Author URI: https://sportscribe.co/
  */
@@ -87,6 +87,8 @@ function create_post_tax() {
 		);
 
 	register_taxonomy( 'league', array( 'preview' ), $args );
+
+        flush_rewrite_rules();
 
 }
 
@@ -255,19 +257,23 @@ function ss_post_previews() {
 	  'ss_meta_match_img_txt'	=> $j->match_img_txt,
 	  'ss_meta_headline'		=> $j->headline
        ),
-      'tax_input'    => array(
-  	'league' => $j->league,
-	'country' => $j->country
-       )
+
     );
 
     // Insert the post
     $postId = wp_insert_post( $post_arr , false);
-    echo "<p>Inserted PostId $postId</p>";
 
     // If the post was inserted, update the sportscribe database with the post's ID
     if (!is_wp_error($postId)) {
+
       $wpdb->update( $table_name, array( 'postId' => $postId ), array( 'fixture_id' => $fixture_id ) );
+      echo "<p>Inserted PostId $postId</p>";
+
+      // Set the taxonomies
+      wp_set_object_terms($postId,$j->league,'league');
+      wp_set_object_terms($postId,$j->country,'country');
+    } else {
+      echo "<p>Error inserting PostId</p>";
     }
 
   }
@@ -278,7 +284,7 @@ function ss_post_previews() {
 // Put the previews on the homepage
 function custom_posts_in_home_loop( $query ) {
   if ( $query->is_home() && $query->is_main_query() )
-  $query->set( 'post_type', array( 'post', 'preview') );
+    $query->set( 'post_type', array( 'post', 'preview') );
   return $query;
 }
 
@@ -287,9 +293,8 @@ function order_posts_by_fixture_date( $query ) {
 
    if ( $query->is_home() && $query->is_main_query() ) {
      $query->set( 'orderby', 'meta_value' );
-     $query->set( 'order', 'ASC' );
+     $query->set( 'order', 'DESC' );
      $query->set( 'meta_key', 'ss_meta_fixture_date' );
-
    }
 
 }
@@ -316,6 +321,8 @@ function sportscribe_do_cron_hook() {
 
   }
 
+  flush_rewrite_rules( false );
+
 }
 
 // Setup the hook to pull data automatically
@@ -324,7 +331,6 @@ if ( ! wp_next_scheduled( 'sportscribe_cron_hook' ) ) {
     wp_schedule_event( strtotime('00:00:00') + random_int(0,3600) , 'daily', 'sportscribe_cron_hook' );
 }
 
-flush_rewrite_rules( false );
 
 
 require_once(dirname(__FILE__).'/custom_code.php');

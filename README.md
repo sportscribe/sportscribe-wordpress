@@ -1,5 +1,5 @@
 # sportscribe-wp
-SportScribe Wordpress Plugin v0.1.3
+SportScribe Wordpress Plugin v0.1.5
 
 ### This is a very preliminary version of the plugin. If you have questions, comments or feature requests, please contact support@sportscribe.co
 
@@ -50,6 +50,7 @@ The following meta data is set for each post
 
 ### Change Log
 
+v0.1.5 = cron errors fixed, not updating taxonomies. Posts ordered by DESC on homepage
 v0.1.4 = Minor bug fixes
 v0.1.3 = Changed custom tax to be public
 v0.1.2 = Minor bug fixes

@@ -3,7 +3,7 @@
  * Plugin Name: SportScribe API <> Wordpress 
  * Plugin URI: https://github.com/sportscribe/sportscribe-wordpress
  * Description: Automatically post SportScribe articles to your Wordpress site.
- * Version: 0.1.5
+ * Version: 0.1.6
  * Author: SportScribe
  * Author URI: https://sportscribe.co/
  */
@@ -33,8 +33,12 @@ function sportscribe_install() {
 
   $charset_collate = $wpdb->get_charset_collate();
 
-  $sql = "CREATE TABLE IF NOT EXISTS $table_name ( fixture_id mediumint unsigned not null primary key, postId mediumint unsigned, data json not null ) $charset_collate;";
 
+  if($wpdb->db_version() < '5.7.8') {
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name ( fixture_id mediumint unsigned not null primary key, postId mediumint unsigned, data mediumtext not null ) $charset_collate;";
+  } else {
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name ( fixture_id mediumint unsigned not null primary key, postId mediumint unsigned, data json not null ) $charset_collate;";
+  }
   require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
   dbDelta( $sql );
 

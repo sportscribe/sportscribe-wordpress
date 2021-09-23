@@ -42,6 +42,9 @@ function sportscribe_doSubmit() {
             update_option('sportscribe_author_id', $_POST['ss_author']);
           }
 
+          update_option('sportscribe_language',$_POST['sportscribe_language']);
+
+
         }
 
 }

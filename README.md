@@ -50,6 +50,7 @@ The following meta data is set for each post
 
 ### Change Log
 
+v0.1.7 = added multi language support
 v0.1.6 = works with mysql < 5.7.8
 v0.1.5 = cron errors fixed, not updating taxonomies. Posts ordered by DESC on homepage
 v0.1.4 = Minor bug fixes
